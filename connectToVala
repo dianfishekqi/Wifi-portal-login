@@ -1,5 +1,5 @@
 #!/bin/sh
-#Authon Dian F
+#Author Dian F
 Network=$( iwconfig wlan0 | egrep -o \"[A-Za-z1-9_]+\" 2>&1)
 ONLINE=$( curl "http://detectportal.firefox.com/" )
 URL="http://172.16.0.12/CP/sq.html"
