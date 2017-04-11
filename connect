@@ -1,0 +1,24 @@
+#!/bin/sh
+#Authon Dian F
+Network=$( iwconfig wlan0 | egrep -o \"[A-Za-z1-9_]+\" 2>&1)
+ONLINE=$( curl "http://detectportal.firefox.com/" )
+URL="http://172.16.0.12/CP/sq.html"
+
+if [[ $Network="\"VALA_Free\"" ]]
+then
+	if [[ $ONLINE != "success" ]] 
+	then
+		/usr/bin/xterm -e "elinks $URL --auto-submit" & 
+		sleep 3s && kill $!
+		connectToVala "tried"
+		
+	fi
+fi
+    
+if  [[ $1 == "tried" && $ONLINE == "success" ]]
+then
+	i3-nagbar -m "Succesfully Connected to Internet" &
+	sleep 2s && kill $!
+	exit
+fi
+   
