@@ -8,13 +8,13 @@ if [[ $Network="\"VALA_Free\"" ]]
 then
 	if [[ $ONLINE != "success" ]] 
 	then
-		/usr/bin/xterm -e "elinks $URL --auto-submit" & 
+		/usr/bin/xterm -e "elinks --auto-submit 1 $URL" & 
 		sleep 3s && kill $!
 		connectToVala "tried"
 		
 	fi
 fi
-    
+#if you have i3 install then it will show you a notification the the connection was successfull    
 if  [[ $1 == "tried" && $ONLINE == "success" ]]
 then
 	i3-nagbar -m "Succesfully Connected to Internet" &
