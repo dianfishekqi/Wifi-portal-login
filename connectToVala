@@ -8,7 +8,7 @@ if [[ $Network="\"VALA_Free\"" ]]
 then
 	if [[ $ONLINE != "success" ]] 
 	then
-		/usr/bin/xterm -e "elinks --auto-submit 1 $URL" & 
+		/usr/bin/xterm -class "wifiLogin" -e "elinks --eval \"document.browse.forms.confirm_submit 0 \" --auto-submit 1 $URL" & 
 		sleep 3s && kill $!
 		connectToVala "tried"
 		
