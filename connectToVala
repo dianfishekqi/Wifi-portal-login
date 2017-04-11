@@ -10,6 +10,7 @@ then
 	then
 		/usr/bin/xterm -class "wifiLogin" -e "elinks --eval \"document.browse.forms.confirm_submit 0 \" --auto-submit 1 $URL" & 
 		sleep 3s && kill $!
+		#I set the class attr in xterm so I can ref it in i3 to hide it from the current workspace
 		connectToVala "tried"
 		
 	fi
