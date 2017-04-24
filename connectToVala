@@ -1,25 +1,24 @@
 #!/bin/sh
 #Author Dian F
-Network=$( iwconfig wlan0 | egrep -o \"[A-Za-z1-9_]+\" 2>&1)
+
+INTERFACE="wlan0"
+Network=$( iwconfig $INTERFACE | egrep -o \"[A-Za-z1-9_]+\" 2>&1)
 ONLINE=$( curl "http://detectportal.firefox.com/" )
 URL="http://172.16.0.12/CP/sq.html"
 
 if [[ $Network="\"VALA_Free\"" ]]
 then
-	if [[ $ONLINE != "success" ]] 
-	then
-		/usr/bin/xterm -class "wifiLogin" -e "elinks -eval \"set document.browse.forms.confirm_submit=0\" -auto-submit 1 $URL" & 
-		sleep 3s && kill $!
-		#I set the class attr in xterm so I can ref it in i3 to hide it from the current workspace
-		connectToVala "tried"
-		
-	fi
+  if [[ $ONLINE != "success" ]]
+  then
+    timeout 3s /usr/bin/xterm -class "wifiLogin" -e "elinks -eval \"set document.browse.forms.confirm_submit=0\" -auto-submit 1 $URL"
+    #I set the class attr in xterm so I can ref it in i3 to hide it from the current workspace
+    connectToVala "tried"
+
+  fi
 fi
-#if you have i3 install then it will show you a notification the the connection was successfull    
+#if you have i3 install then it will show you a notification the the connection was successfull
 if  [[ $1 == "tried" && $ONLINE == "success" ]]
 then
-	i3-nagbar -m "Succesfully Connected to Internet" &
-	sleep 2s && kill $!
-	exit
+  timeout 2s i3-nagbar -m "Succesfully Connected to Internet"
+  exit
 fi
-   
