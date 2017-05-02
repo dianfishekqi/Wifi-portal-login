@@ -1,3 +1,4 @@
+#!/bin/bash
 if [[ $1 == "" ]]
 then
   echo "Usage: ./install.sh wireless-interface
