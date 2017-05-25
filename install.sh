@@ -17,6 +17,6 @@ else
   cp connectToVala /usr/bin/connectToVala
   mv connectToVala.orig connectToVala
   chmod +x /usr/bin/connectToVala
-  echo "You can run the script by writing: connectToVala"
+  echo -e "Yay Success!\nYou can run the script by writing: connectToVala"
   cd $cdir
 fi
